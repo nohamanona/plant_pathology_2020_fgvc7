@@ -1,0 +1,196 @@
+1. Git for windows
+
+https://git-scm.com/downloads
+からダウンロード。
+インストール先から、"git-bash.exe"を実行でgit起動
+
+コマンドライン上である
+
+
+2. GIT初期設定
+環境変数を以下に設定
+　変数名：HOME
+　値　　：D:/git
+
+git-bash.exeのプロパティをいかに設定
+→作業フォルダー：%HOME%
+
+
+
+$ git config --global user.email "kojimatakuya919@gmail.com"
+$ git config --global user.name "tkcross"
+
+
+3. Git for windows からgitへアクセス
+https://qiita.com/manabu-watanabe/items/ecf1b434baf305adaa00
+
+
+git@github.com:tkcross/Samurai_Kojima.git
+
+
+TortoiseGitはWindowsのエクスプローラ上でＧＵＩ的に操作できるアプリ
+なので必須ではない。
+3. TortoiseGitのダウンロード
+https://qiita.com/yasushi00/items/74ebfa18545a27cf78d2
+
+日本語版も合わせてインストール
+
+
+4. TortoiseGitの初期設定
+ローカルリポジトリ作成場所の設定
+
+上記Gitで指定した場所で右クリック→「Gitここにリポジトリを作成」
+→.git隠しフォルダができる。
+
+一個上の階層（gitフォルダが見える場所）でクローン
+右クリック→「Gitクローン(複製)」
+
+
+
+
+
+★★★
+今回のgitリポジトリ
+https://github.com/nohamanona/plant_pathology_2020_fgvc7.git
+
+
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace
+$ cd plant_pathology_2020_fgvc7/
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7
+$ ls
+memo.txt
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7
+$ git clone https://github.com/nohamanona/plant_pathology_2020_fgvc7.git
+Cloning into 'plant_pathology_2020_fgvc7'...
+fatal: unable to access 'https://github.com/nohamanona/plant_pathology_2020_fgvc7.git/': Failed to connect to github.com port 443: Timed out
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7
+$ git clone https://github.com/nohamanona/plant_pathology_2020_fgvc7.git
+Cloning into 'plant_pathology_2020_fgvc7'...
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 7 (delta 0), reused 7 (delta 0), pack-reused 0
+Unpacking objects: 100% (7/7), done.
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7
+$ ls
+memo.txt  plant_pathology_2020_fgvc7/
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7
+$ git branch
+fatal: not a git repository (or any of the parent directories): .git
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7
+$ cd plant_pathology_2020_fgvc7/
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7/plant_pathology_2020_fgvc7 (master)
+$ git branch
+* master
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7/plant_pathology_2020_fgvc7 (master)
+$ git pull https://github.com/nohamanona/plant_pathology_2020_fgvc7.git
+From https://github.com/nohamanona/plant_pathology_2020_fgvc7
+ * branch            HEAD       -> FETCH_HEAD
+Already up to date.
+
+takuya@natsu MINGW64 /d/MachineLearning/workspace/plant_pathology_2020_fgvc7/plant_pathology_2020_fgvc7 (master)
+$
+
+
+
+★★★
+その他コマンド
+1. git cloneをとってくる
+$ git clone git@github.com:tkcross/Samurai_Kojima.git
+
+アドレスは、git HPから、レポジトリ→clone→use sshのURLコピー
+パスワードを入力
+
+→クローンが作られる＝ローカルリポジトリの作成
+
+2. ブランチを作る
+できたクローンフォルダへ移動
+$ cd Samurai_Kojima/
+
+ブランチの確認・作成
+★：本家はgithub上にあるmasterで、
+　　cloneしてきたものはlocalのためそこからわざわざbranchを作るのは
+　　試してみるレベルであれば不要
+拓也@natsu MINGW64 /d/Samurai_Kojima (master)
+$ git branch
+* master
+
+$ git branch test
+* master
+  test
+
+
+チェックアウトでブランチの移動
+拓也@natsu MINGW64 /d/Samurai_Kojima (master)
+$ git checkout test
+Switched to branch 'test'
+拓也@natsu MINGW64 /d/Samurai_Kojima (test)
+$ git branch
+  master
+* test
+
+
+”あたらしくファイルを作成・編集などする。”
+
+GITファイルを確認
+拓也@natsu MINGW64 /d/Samurai_Kojima (test)
+$ git ls-files
+Makefile
+README.md
+addfile
+documents/Makefile
+documents/files.html
+・・
+
+ブランチに追加するものをaddで追加
+$git add addfile
+
+※必要に応じてREADMEを編集する
+
+変更した結果をローカルリポジトリに反映する
+編集のコメントを追加
+拓也@natsu MINGW64 /d/Samurai_Kojima (test)
+$ git commit
+On branch test
+nothing to commit, working tree clean
+$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+$ git branch
+* master
+  test
+$ git merge test
+Already up to date.
+
+
+リモートリポジトリへ反映
+拓也@natsu MINGW64 /d/Samurai_Kojima (master)
+$ git push origin master
+Warning: Permanently added the RSA host key for IP address '52.192.72.89' to the list of known hosts.
+Enter passphrase for key '/d/.ssh/id_rsa':
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 293 bytes | 97.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:tkcross/Samurai_Kojima.git
+   db7d090..285ff54  master -> master
+
+
+
+
+
+
+
